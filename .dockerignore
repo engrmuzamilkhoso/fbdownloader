@@ -1,0 +1,11 @@
+nextjs-version/
+.git/
+.vscode/
+bin/yt-dlp
+bin/yt-dlp.exe
+cache/rate-limit/*
+!cache/rate-limit/.gitkeep
+config/.env
+*.log
+README.md
+.env

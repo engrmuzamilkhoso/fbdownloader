@@ -1,0 +1,11 @@
+<?php require ROOT_PATH . '/templates/partials/header.php'; ?>
+<?php require ROOT_PATH . '/templates/sections/hero.php'; ?>
+<?php require ROOT_PATH . '/templates/sections/trust-highlights.php'; ?>
+<?php require ROOT_PATH . '/templates/sections/supported-platforms.php'; ?>
+<?php require ROOT_PATH . '/templates/sections/features.php'; ?>
+<?php require ROOT_PATH . '/templates/sections/intro-copy.php'; ?>
+<?php require ROOT_PATH . '/templates/sections/how-it-works.php'; ?>
+<?php require ROOT_PATH . '/templates/sections/faq.php'; ?>
+<?php require ROOT_PATH . '/templates/sections/privacy-security.php'; ?>
+<?php require ROOT_PATH . '/templates/sections/contact.php'; ?>
+<?php require ROOT_PATH . '/templates/partials/footer.php'; ?>

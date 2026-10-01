@@ -1,30 +1,16 @@
+/bin/
+/cache/rate-limit/*
+!/cache/rate-limit/.gitkeep
+/config/.env
 /vendor/
-node_modules/
-npm-debug.log
-yarn-error.log
+composer.lock
+*.log
+.DS_Store
+Thumbs.db
+/.env
 
-# Laravel 4 specific
-bootstrap/compiled.php
-app/storage/
+# Old Next.js version — kept locally only, not part of this repo
+nextjs-version/
 
-# Laravel 5 & Lumen specific
-public/storage
-public/hot
-
-# Laravel 5 & Lumen specific with changed public path
-public_html/storage
-public_html/hot
-
-storage/*.key
-.env
-Homestead.yaml
-Homestead.json
-/.vagrant
-.phpunit.result.cache
-
-/public/build
-/storage/pail
-.env.backup
-.env.production
-.phpactor.json
-auth.json
+# Editor settings
+.vscode/

@@ -1,0 +1,12 @@
+{
+  "name": "FBVideo Downloader — Free Facebook Video Downloader",
+  "short_name": "FBVideo",
+  "description": "Download public Facebook videos in HD or SD in seconds. No login, no watermark.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10b981",
+  "icons": [
+    { "src": "/assets/images/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
