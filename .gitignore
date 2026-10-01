@@ -9,8 +9,6 @@ composer.lock
 Thumbs.db
 /.env
 
-# Old Next.js version — kept locally only, not part of this repo
-nextjs-version/
 
 # Editor settings
 .vscode/

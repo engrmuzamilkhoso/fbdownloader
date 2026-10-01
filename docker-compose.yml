@@ -17,7 +17,6 @@ services:
       RATE_LIMIT_WINDOW_SECONDS: "60"
       # Views/downloads reporting to the Toolzen admin (values come from ./.env)
       TOOLZEN_EVENTS_URL: ${TOOLZEN_EVENTS_URL:-}
-      TOOLZEN_INGEST_KEY: ${TOOLZEN_INGEST_KEY:-}
       TOOLZEN_CONNECT_TO: ${TOOLZEN_CONNECT_TO:-}
     extra_hosts:
       - "host.docker.internal:host-gateway"

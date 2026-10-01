@@ -6,8 +6,7 @@ declare(strict_types=1);
  * Reports this site's page views and successful downloads to the Toolzen
  * tools site, where FBVideo Downloader is listed as an external tool and its
  * views vs. usage appear in the admin dashboard (see the tools project's
- * ExternalToolController). Disabled unless TOOLZEN_EVENTS_URL and
- * TOOLZEN_INGEST_KEY are both set.
+ * ExternalToolController). Disabled unless TOOLZEN_EVENTS_URL is set.
  *
  * Events are sent after the response has been flushed, with short timeouts,
  * and any failure is ignored — stats must never slow down or break a page
@@ -18,7 +17,7 @@ const STATS_VISITOR_COOKIE = 'fbv_vid';
 
 function statsEnabled(): bool
 {
-    return TOOLZEN_EVENTS_URL !== '' && TOOLZEN_INGEST_KEY !== '';
+    return TOOLZEN_EVENTS_URL !== '';
 }
 
 /**
@@ -125,7 +124,6 @@ function sendStatsEvent(array $payload): void
         CURLOPT_HTTPHEADER => [
             'Content-Type: application/json',
             'Accept: application/json',
-            'X-Ingest-Key: ' . TOOLZEN_INGEST_KEY,
         ],
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CONNECTTIMEOUT_MS => 800,

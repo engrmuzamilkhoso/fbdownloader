@@ -14,8 +14,7 @@ WORKDIR /var/www/html
 
 COPY . /var/www/html
 
-RUN rm -rf /var/www/html/nextjs-version \
-    && php scripts/setup-ytdlp.php \
+RUN php scripts/setup-ytdlp.php \
     && mkdir -p /var/www/html/cache/rate-limit \
     && chown -R www-data:www-data /var/www/html/cache /var/www/html/bin \
     && chmod -R 775 /var/www/html/cache

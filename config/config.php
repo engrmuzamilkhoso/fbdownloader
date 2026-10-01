@@ -25,9 +25,8 @@ define('ADSENSE_CLIENT_ID', env('ADSENSE_CLIENT_ID', ''));
 define('YTDLP_BINARY_PATH', env('YTDLP_BINARY_PATH', ROOT_PATH . '/bin/' . (stripos(PHP_OS_FAMILY, 'Windows') === 0 ? 'yt-dlp.exe' : 'yt-dlp')));
 
 // Optional: report page views + downloads to the Toolzen tools site's admin
-// dashboard (see helpers/toolzen_stats.php). Leave either blank to disable.
+// dashboard (see helpers/toolzen_stats.php). Leave blank to disable.
 define('TOOLZEN_EVENTS_URL', env('TOOLZEN_EVENTS_URL', '') ?? '');
-define('TOOLZEN_INGEST_KEY', env('TOOLZEN_INGEST_KEY', '') ?? '');
 define('TOOLZEN_CONNECT_TO', env('TOOLZEN_CONNECT_TO', '') ?? '');
 
 define('RATE_LIMIT_DIR', ROOT_PATH . '/cache/rate-limit');
