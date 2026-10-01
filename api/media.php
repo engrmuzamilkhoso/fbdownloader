@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../includes/bootstrap.php';
-require_once __DIR__ . '/../services/YtDlpService.php';
+require_once __DIR__ . '/../services/VideoResolver.php';
 require_once __DIR__ . '/../helpers/status_codes.php';
 
 const MEDIA_FIRST_BYTE_TIMEOUT_SECONDS = 25;
@@ -34,6 +34,24 @@ if (!isValidFormatId($formatId)) {
 }
 
 $normalizedUrl = normalizeFacebookUrl($rawUrl);
+$filename = sanitizeFilenamePart($title) . '-' . $formatId . '.mp4';
+
+// Pure-PHP path (no proc_open): re-resolve for a fresh CDN URL, then proxy it.
+if (videoEngine() === 'scraper') {
+    $resolved = scraperFetchVideoInfo($normalizedUrl);
+    if (!$resolved['ok']) {
+        jsonResponse(['error' => $resolved['error']['message']], httpStatusForErrorCode($resolved['error']['code']));
+    }
+    $mediaUrl = $resolved['info']['sources'][$formatId] ?? null;
+    if ($mediaUrl === null) {
+        jsonResponse(['error' => 'That quality is no longer available. Please resolve the link again.'], 404);
+    }
+    if (!scraperStreamMedia($mediaUrl, $filename)) {
+        jsonResponse(['error' => 'Facebook refused the download. Please try again shortly.'], 502);
+    }
+    exit;
+}
+
 $handle = ytdlpSpawnDownload($normalizedUrl, $formatId);
 
 if ($handle === null) {
@@ -86,7 +104,6 @@ while (ob_get_level() > 0) {
     ob_end_clean();
 }
 
-$filename = sanitizeFilenamePart($title) . '-' . $formatId . '.mp4';
 header('Content-Type: video/mp4');
 header('Content-Disposition: attachment; filename="' . $filename . '"');
 header('Cache-Control: no-store');

@@ -22,6 +22,10 @@ define('PRIVACY_EMAIL', env('PRIVACY_EMAIL', 'privacy@fbvideodownloader.example.
 define('ADSENSE_ENABLED', envBool('ADSENSE_ENABLED', false));
 define('ADSENSE_CLIENT_ID', env('ADSENSE_CLIENT_ID', ''));
 
+// Video backend: auto (yt-dlp if it can run here, else the pure-PHP
+// scraper), or force "ytdlp" / "scraper". See services/VideoResolver.php.
+define('VIDEO_ENGINE', strtolower((string) env('VIDEO_ENGINE', 'auto')));
+
 define('YTDLP_BINARY_PATH', env('YTDLP_BINARY_PATH', ROOT_PATH . '/bin/' . (stripos(PHP_OS_FAMILY, 'Windows') === 0 ? 'yt-dlp.exe' : 'yt-dlp')));
 
 // Optional: report page views + downloads to the Toolzen tools site's admin
