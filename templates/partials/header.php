@@ -16,6 +16,12 @@ $fullTitle = $pageTitle === SITE_NAME ? $pageTitle . ' — Save Facebook Videos 
 <meta name="description" content="<?= e($pageDescription) ?>">
 <link rel="canonical" href="<?= e($canonicalUrl) ?>">
 <meta name="robots" content="index, follow">
+<?php if (GOOGLE_SITE_VERIFICATION !== ''): ?>
+<meta name="google-site-verification" content="<?= e(GOOGLE_SITE_VERIFICATION) ?>">
+<?php endif; ?>
+<?php if (BING_SITE_VERIFICATION !== ''): ?>
+<meta name="msvalidate.01" content="<?= e(BING_SITE_VERIFICATION) ?>">
+<?php endif; ?>
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#070d0b" media="(prefers-color-scheme: dark)">
 <meta name="csrf-token" content="<?= e(csrfToken()) ?>">

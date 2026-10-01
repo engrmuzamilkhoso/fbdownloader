@@ -22,6 +22,10 @@ define('PRIVACY_EMAIL', env('PRIVACY_EMAIL', 'privacy@fbvideodownloader.example.
 define('ADSENSE_ENABLED', envBool('ADSENSE_ENABLED', false));
 define('ADSENSE_CLIENT_ID', env('ADSENSE_CLIENT_ID', ''));
 
+// Search Console / Bing "HTML tag" verification codes (just the content value).
+define('GOOGLE_SITE_VERIFICATION', env('GOOGLE_SITE_VERIFICATION', '') ?? '');
+define('BING_SITE_VERIFICATION', env('BING_SITE_VERIFICATION', '') ?? '');
+
 // Video backend: auto (yt-dlp if it can run here, else the pure-PHP
 // scraper), or force "ytdlp" / "scraper". See services/VideoResolver.php.
 define('VIDEO_ENGINE', strtolower((string) env('VIDEO_ENGINE', 'auto')));
