@@ -19,6 +19,9 @@ function assetForPlatform(): array
     if (PHP_OS_FAMILY === 'Darwin') {
         return ['asset' => 'yt-dlp_macos', 'localName' => 'yt-dlp'];
     }
+    if (in_array(strtolower(php_uname('m')), ['aarch64', 'arm64'], true)) {
+        return ['asset' => 'yt-dlp_linux_aarch64', 'localName' => 'yt-dlp'];
+    }
     return ['asset' => 'yt-dlp_linux', 'localName' => 'yt-dlp'];
 }
 
@@ -76,15 +79,33 @@ function downloadFile(string $url, string $destination): void
     }
 }
 
+/**
+ * Runs `yt-dlp --version` through proc_open() — the same function the app
+ * itself uses (services/YtDlpService.php), so a pass here means downloads
+ * will work. Shared hosts often disable exec() but leave proc_open() alone.
+ */
 function binaryWorks(string $path): bool
 {
     if (!is_file($path)) {
         return false;
     }
-    $output = [];
-    $exitCode = 0;
-    exec(escapeshellarg($path) . ' --version 2>&1', $output, $exitCode);
-    return $exitCode === 0;
+    if (!function_exists('proc_open')) {
+        throw new RuntimeException(
+            'proc_open() is disabled on this server (check disable_functions in php.ini). '
+            . 'The app needs it to run yt-dlp, so ask your host to enable proc_open.'
+        );
+    }
+
+    $process = proc_open([$path, '--version'], [1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes);
+    if (!is_resource($process)) {
+        return false;
+    }
+    stream_get_contents($pipes[1]);
+    stream_get_contents($pipes[2]);
+    fclose($pipes[1]);
+    fclose($pipes[2]);
+
+    return proc_close($process) === 0;
 }
 
 ['asset' => $asset, 'localName' => $localName] = assetForPlatform();
